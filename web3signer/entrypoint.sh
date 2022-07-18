@@ -1,36 +1,36 @@
 #!/bin/bash
 
 export KEYFILES_DIR="/opt/web3signer/keyfiles"
-export NETWORK="prater"
+export NETWORK="ropsten"
 export WEB3SIGNER_API="http://web3signer.web3signer-${NETWORK}.dappnode:9000"
 
 # Assign proper value to ETH2_CLIENT. The UI uses the web3signer domain in the Header "Host"
 case "$ETH2_CLIENT" in
 "prysm")
-  ETH2_CLIENT_DNS="validator.prysm-prater.dappnode"
-  export BEACON_NODE_API="http://beacon-chain.prysm-prater.dappnode:3500"
-  export CLIENT_API="http://validator.prysm-prater.dappnode:3500"
+  ETH2_CLIENT_DNS="validator.prysm-ropsten.dappnode"
+  export BEACON_NODE_API="http://beacon-chain.prysm-ropsten.dappnode:3500"
+  export CLIENT_API="http://validator.prysm-ropsten.dappnode:3500"
   export TOKEN_FILE="/security/prysm/auth-token"
   export CLIENTS_TO_REMOVE=(teku lighthouse nimbus)
   ;;
 "teku")
-  ETH2_CLIENT_DNS="validator.teku-prater.dappnode"
-  export BEACON_NODE_API="http://beacon-chain.teku-prater.dappnode:3500"
-  export CLIENT_API="https://validator.teku-prater.dappnode:3500"
+  ETH2_CLIENT_DNS="validator.teku-ropsten.dappnode"
+  export BEACON_NODE_API="http://beacon-chain.teku-ropsten.dappnode:3500"
+  export CLIENT_API="https://validator.teku-ropsten.dappnode:3500"
   export TOKEN_FILE="/security/teku/validator-api-bearer"
   export CLIENTS_TO_REMOVE=(prysm lighthouse nimbus)
   ;;
 "lighthouse")
-  ETH2_CLIENT_DNS="validator.lighthouse-prater.dappnode"
-  export BEACON_NODE_API="http://beacon-chain.lighthouse-prater.dappnode:3500"
-  export CLIENT_API="http://validator.lighthouse-prater.dappnode:3500"
+  ETH2_CLIENT_DNS="validator.lighthouse-ropsten.dappnode"
+  export BEACON_NODE_API="http://beacon-chain.lighthouse-ropsten.dappnode:3500"
+  export CLIENT_API="http://validator.lighthouse-ropsten.dappnode:3500"
   export TOKEN_FILE="/security/lighthouse/api-token.txt"
   export CLIENTS_TO_REMOVE=(teku prysm nimbus)
   ;;
 "nimbus")
-  ETH2_CLIENT_DNS="beacon-validator.nimbus-prater.dappnode"
-  export BEACON_NODE_API="http://beacon-validator.nimbus-prater.dappnode:4500"
-  export CLIENT_API="http://beacon-validator.nimbus-prater.dappnode:3500"
+  ETH2_CLIENT_DNS="beacon-validator.nimbus-ropsten.dappnode"
+  export BEACON_NODE_API="http://beacon-validator.nimbus-ropsten.dappnode:4500"
+  export CLIENT_API="http://beacon-validator.nimbus-ropsten.dappnode:3500"
   export TOKEN_FILE="/security/nimbus/auth-token"
   export CLIENTS_TO_REMOVE=(teku lighthouse prysm)
   ;;
@@ -86,7 +86,7 @@ exec /opt/web3signer/bin/web3signer \
   --key-store-path="$KEYFILES_DIR" \
   --http-listen-port=9000 \
   --http-listen-host=0.0.0.0 \
-  --http-host-allowlist="web3signer.web3signer-prater.dappnode,ui.web3signer-prater.dappnode,prysm.migration-prater.dappnode,$ETH2_CLIENT_DNS" \
+  --http-host-allowlist="web3signer.web3signer-ropsten.dappnode,ui.web3signer-ropsten.dappnode,prysm.migration-ropsten.dappnode,$ETH2_CLIENT_DNS" \
   --http-cors-origins=* \
   --metrics-enabled=true \
   --metrics-host 0.0.0.0 \
@@ -94,8 +94,8 @@ exec /opt/web3signer/bin/web3signer \
   --metrics-host-allowlist="*" \
   --idle-connection-timeout-seconds=90 \
   eth2 \
-  --network=prater \
-  --slashing-protection-db-url=jdbc:postgresql://postgres.web3signer-prater.dappnode:5432/web3signer \
+  --network=ropsten \
+  --slashing-protection-db-url=jdbc:postgresql://postgres.web3signer-ropsten.dappnode:5432/web3signer \
   --slashing-protection-db-username=postgres \
   --slashing-protection-db-password=password \
   --key-manager-api-enabled=true \
